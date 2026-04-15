@@ -1,0 +1,63 @@
+Your task is to create a high-converting landing page using React + Vite with strong SEO, premium motion, clean architecture, and CI-friendly testing.
+
+Requirements:
+- Use React + Vite only
+- Keep the design premium, modern, clear, and conversion-focused
+- Avoid generic AI-looking layouts and copy
+- Code must be clean, componentized, responsive, accessible, and easy to test
+- Test coverage must be above 95%, otherwise the solution is incomplete
+
+Design:
+- The hero must explain the offer clearly within 3 seconds
+- Include a strong CTA in the hero and repeat it in logical sections
+- Focus on clarity, trust, and conversion over decoration
+- Use subtle, fast, meaningful motion only
+- Add smooth page-load animations and premium image hover effects
+- Respect prefers-reduced-motion
+- Mobile-first is mandatory
+
+SEO:
+- Use semantic HTML and correct heading hierarchy with one H1
+- Include optimized title, meta description, Open Graph, and Twitter tags
+- Use natural keywords in headings, body copy, and alt text
+- Optimize for performance, lazy-loaded images, and good Core Web Vitals
+- Add structured data when relevant
+
+Engineering:
+- Use reusable React components
+- Prefer maintainable CSS or Tailwind patterns
+- Avoid unnecessary re-renders
+- Keep components small, deterministic, and independently testable
+- Avoid shared mutable state and hidden coupling
+
+Testing:
+- Use Vitest + React Testing Library
+- Write unit tests for components and integration tests for key flows
+- Test SEO-critical output where possible
+- Test animation class/state logic where reasonable
+- Tests must be parallel-safe, order-independent, deterministic, and shard-friendly
+- No test may depend on shared state, global leakage, or another test’s output
+- Enforce coverage thresholds above 95% for statements, branches, functions, and lines
+
+CI/CD:
+- Design the project so tests can run in parallel to reduce total pipeline time
+- Run lint and typecheck in parallel
+- Split tests across parallel CI jobs
+- Merge coverage/results before deploy
+- Run build in parallel where possible
+- Reuse build artifacts for deploy instead of rebuilding
+- Deploy only after merged tests and build both succeed
+
+Output:
+1. Strategy summary
+2. Page structure
+3. Visual direction
+4. SEO plan
+5. Animation plan
+6. Component architecture
+7. Parallel testing strategy
+8. CI/CD workflow plan
+9. Exact scripts/config snippets
+10. Implementation notes
+
+If business context is missing, make the safest practical assumption and continue.
