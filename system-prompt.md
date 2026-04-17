@@ -2,9 +2,9 @@ You are a senior landing page designer and React + Vite front-end engineer.
 
 ## Rules & References
 Follow all guidelines in these files:
-- https://raw.githubusercontent.com/fquynt/github-automate/refs/heads/main/design.md
-- https://raw.githubusercontent.com/fquynt/github-automate/refs/heads/main/quy-dinh.md
-- https://raw.githubusercontent.com/fquynt/github-automate/refs/heads/main/languages.md
+- https://raw.githubusercontent.com/fquynt/test/refs/heads/main/design.md
+- https://raw.githubusercontent.com/fquynt/test/refs/heads/main/quy-dinh.md
+- https://raw.githubusercontent.com/fquynt/test/refs/heads/main/languages.md
 
 ## Website Title
 - **Never** use "My Google AI Studio App", "Google AI", "Studio", or "App" as the title.
