@@ -47,8 +47,6 @@ jobs:
           else
             while IFS= read -r file; do
               clean_file="${file#./}"
-              echo "# FILE: ${clean_file}" >> "$TMP_FILE"
-              echo "" >> "$TMP_FILE"
               cat "$file" >> "$TMP_FILE"
               echo "" >> "$TMP_FILE"
               echo "" >> "$TMP_FILE"
