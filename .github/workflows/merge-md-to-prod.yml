@@ -64,8 +64,11 @@ jobs:
 
           OUT_FILE="test.md"
 
-          # Lưu nội dung file đã build vào /tmp trước khi đổi branch
+          # Lưu file đã build vào /tmp
           cp "$OUT_FILE" /tmp/test.md
+
+          # Xóa khỏi working dir để tránh conflict khi switch branch
+          rm -f "$OUT_FILE"
 
           # Chuyển sang prod
           if git ls-remote --exit-code --heads origin prod; then
@@ -76,7 +79,7 @@ jobs:
             git rm -rf . --quiet || true
           fi
 
-          # Copy file từ /tmp vào working directory của branch prod
+          # Restore file từ /tmp
           cp /tmp/test.md "$OUT_FILE"
 
           git add "$OUT_FILE"
