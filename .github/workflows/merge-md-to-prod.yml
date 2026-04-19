@@ -1,0 +1,87 @@
+name: Merge Markdown files to prod
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  merge-md:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Build test.md from all markdown files in main
+        shell: bash
+        run: |
+          set -e
+
+          OUT_FILE="test.md"
+          TMP_FILE="$(mktemp)"
+
+          # Lấy tất cả file *.md, bỏ qua .github nếu muốn
+          find . \
+            -type f \
+            -name "*.md" \
+            ! -path "./.github/*" \
+            ! -name "$OUT_FILE" \
+            | sort > /tmp/md-list.txt
+
+          # Nếu không có file md nào thì tạo file rỗng có note
+          if [ ! -s /tmp/md-list.txt ]; then
+            echo "# test" > "$TMP_FILE"
+            echo "" >> "$TMP_FILE"
+            echo "No markdown files found." >> "$TMP_FILE"
+          else
+            while IFS= read -r file; do
+              clean_file="${file#./}"
+              echo "# FILE: ${clean_file}" >> "$TMP_FILE"
+              echo "" >> "$TMP_FILE"
+              cat "$file" >> "$TMP_FILE"
+              echo "" >> "$TMP_FILE"
+              echo "" >> "$TMP_FILE"
+            done < /tmp/md-list.txt
+          fi
+
+          mv "$TMP_FILE" "$OUT_FILE"
+
+      - name: Push test.md to prod branch
+        shell: bash
+        run: |
+          set -e
+
+          OUT_FILE="test.md"
+
+          # Chuyển sang prod, nếu chưa có thì tạo mới từ remote/main
+          if git ls-remote --exit-code --heads origin prod; then
+            git fetch origin prod
+            git switch -C prod --track origin/prod || git switch prod
+            git pull origin prod --ff-only
+          else
+            git switch --create prod
+          fi
+
+          # Lấy file test.md đã build từ branch main trong working tree hiện tại
+          git checkout main -- "$OUT_FILE"
+
+          git add "$OUT_FILE"
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: update test.md from main"
+          git push origin prod
