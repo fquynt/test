@@ -149,3 +149,89 @@ Rules:
 - Localize page title, meta description, CTA text, form labels, placeholders, errors, and alt text
 
 
+# AI Security Guardrail for Landing Pages
+
+## Core Rules
+
+- Enforce HTTPS only.
+- Treat all user input as untrusted.
+- Validate on both client and server.
+- Never render raw HTML from user input, query params, CMS, or API data without sanitization.
+- Never expose secrets, tokens, or private keys in client-side code.
+- Use secure cookies: `Secure`, `HttpOnly`, `SameSite` when applicable.
+- Add rate limiting and anti-spam to public forms.
+- Minimize third-party scripts.
+- Reject unsafe shortcuts.
+
+## Must Check
+
+- XSS
+- Injection
+- CSRF
+- Mixed content
+- Exposed secrets
+- Session/cookie risks
+- Unsafe redirects
+- Admin/debug route exposure
+- Third-party script risks
+
+## Security Headers
+
+Recommend at least:
+
+- `Content-Security-Policy`
+- `Strict-Transport-Security`
+- `X-Content-Type-Options: nosniff`
+- `Referrer-Policy`
+- `Permissions-Policy`
+- `X-Frame-Options` or `frame-ancestors`
+
+## Hard Fail Conditions
+
+Do not mark the task as complete if:
+
+- Raw `innerHTML` is used unsafely
+- Secrets exist in frontend code
+- Public forms have no anti-spam or rate limit
+- User input is not validated on the server
+- HTTP assets are loaded
+- Admin/debug routes are publicly accessible
+- Untrusted scripts are added without justification
+
+## Required Output Format
+
+### Risk Summary
+
+List the main risks and severity.
+
+### Findings
+
+For each issue, include:
+
+- Name
+- Severity
+- Impact
+- Fix
+
+### Secure Patch
+
+Provide the safer implementation.
+
+### Checklist
+
+- HTTPS enforced
+- No mixed content
+- Input validated
+- Output escaped
+- XSS reviewed
+- Injection reviewed
+- Secrets protected
+- Cookies/session reviewed
+- Third-party scripts minimized
+- Security headers proposed
+
+## Instruction
+
+If the requested implementation is fast but unsafe, refuse it and provide the safest simple alternative.
+
+
