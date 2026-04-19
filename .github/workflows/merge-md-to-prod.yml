@@ -47,8 +47,6 @@ jobs:
           else
             while IFS= read -r file; do
               clean_file="${file#./}"
-              echo "# FILE: ${clean_file}" >> "$TMP_FILE"
-              echo "" >> "$TMP_FILE"
               cat "$file" >> "$TMP_FILE"
               echo "" >> "$TMP_FILE"
               echo "" >> "$TMP_FILE"
@@ -64,17 +62,23 @@ jobs:
 
           OUT_FILE="test.md"
 
-          # Chuyển sang prod, nếu chưa có thì tạo mới từ remote/main
+          # Lưu file đã build vào /tmp
+          cp "$OUT_FILE" /tmp/test.md
+
+          # Xóa khỏi working dir để tránh conflict khi switch branch
+          rm -f "$OUT_FILE"
+
+          # Chuyển sang prod
           if git ls-remote --exit-code --heads origin prod; then
             git fetch origin prod
-            git switch -C prod --track origin/prod || git switch prod
-            git pull origin prod --ff-only
+            git checkout -B prod origin/prod
           else
-            git switch --create prod
+            git checkout --orphan prod
+            git rm -rf . --quiet || true
           fi
 
-          # Lấy file test.md đã build từ branch main trong working tree hiện tại
-          git checkout main -- "$OUT_FILE"
+          # Restore file từ /tmp
+          cp /tmp/test.md "$OUT_FILE"
 
           git add "$OUT_FILE"
 
