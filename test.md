@@ -23,13 +23,16 @@ Generate a `metadata.json` file containing the app's name and a brief descriptio
 Your task is to create a high-converting landing page using React + Vite with strong SEO, premium motion, clean architecture, and CI-friendly testing.
 
 Requirements:
+
 - Use React + Vite only
 - Keep the design premium, modern, clear, and conversion-focused
 - Avoid generic AI-looking layouts and copy
 - Code must be clean, componentized, responsive, accessible, and easy to test
 - Test coverage must be above 95%, otherwise the solution is incomplete
+- All links have its page. Dont lets the page empty
 
 Design:
+
 - The hero must explain the offer clearly within 3 seconds
 - Include a strong CTA in the hero and repeat it in logical sections
 - Focus on clarity, trust, and conversion over decoration
@@ -39,6 +42,7 @@ Design:
 - Mobile-first is mandatory
 
 SEO:
+
 - Use semantic HTML and correct heading hierarchy with one H1
 - Include optimized title, meta description, Open Graph, and Twitter tags
 - Use natural keywords in headings, body copy, and alt text
@@ -46,6 +50,7 @@ SEO:
 - Add structured data when relevant
 
 Engineering:
+
 - Use reusable React components
 - Prefer maintainable CSS or Tailwind patterns
 - Avoid unnecessary re-renders
@@ -53,6 +58,7 @@ Engineering:
 - Avoid shared mutable state and hidden coupling
 
 Testing:
+
 - Use Vitest + React Testing Library
 - Write unit tests for components and integration tests for key flows
 - Test SEO-critical output where possible
@@ -62,6 +68,7 @@ Testing:
 - Enforce coverage thresholds above 95% for statements, branches, functions, and lines
 
 CI/CD:
+
 - Design the project so tests can run in parallel to reduce total pipeline time
 - Run lint and typecheck in parallel
 - Split tests across parallel CI jobs
@@ -71,6 +78,7 @@ CI/CD:
 - Deploy only after merged tests and build both succeed
 
 Output:
+
 1. Strategy summary
 2. Page structure
 3. Visual direction
